@@ -8,8 +8,9 @@ This repository requires you to have local versions of `docker` and `git`. If yo
 
 1. Run `chmod +x ./initialize.sh`
 2. Run `./initialize.sh` to download application repositories
+3. Add a `NPM_TOKEN` environment variable to your shell with a valid `@linniaprotocol` npm as its value
 3. Choose which environment you want to run from the `.env` files, then rename that file to `.env`
-4. If choosing `local.env`, make sure you have a local testnet running at port `7545` with the contracts deployed
+4. If choosing `.env.local`, make sure you have a local testnet running at port `7545` with the contracts deployed
 5. Run `docker-compose up`
 
 And you should be good to go!

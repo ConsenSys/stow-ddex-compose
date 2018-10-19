@@ -4,7 +4,7 @@ services:
     build: 
       context: ./linnia-server/.
       args:
-        - NPM_TOKEN=d83c6d3a-ca8a-4cc0-991a-d73cd00d8259
+        - NPM_TOKEN=${NPM_TOKEN}
     volumes:
       - ./linnia-server/:/usr/src/linnia-server
       - /usr/src/linnia-server/node_modules
@@ -23,7 +23,7 @@ services:
     build: 
       context: ./linnia-ddex-server/.
       args:
-        - NPM_TOKEN=d83c6d3a-ca8a-4cc0-991a-d73cd00d8259
+        - NPM_TOKEN=${NPM_TOKEN}
     volumes:
       - ./linnia-ddex-server/:/usr/src/linnia-ddex-server
       - /usr/src/linnia-ddex-server/node_modules
@@ -43,7 +43,7 @@ services:
     build: 
       context: ./linnia-ddex-ui/.
       args:
-        - NPM_TOKEN=d83c6d3a-ca8a-4cc0-991a-d73cd00d8259
+        - NPM_TOKEN=${NPM_TOKEN}
     volumes:
       - ./linnia-ddex-ui/:/usr/src/linnia-ddex-ui
       - /usr/src/linnia-ddex-ui/node_modules
