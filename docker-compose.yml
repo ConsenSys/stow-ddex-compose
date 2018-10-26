@@ -1,0 +1,59 @@
+version: '3'
+services:
+  server:
+    build: 
+      context: ./linnia-server/.
+      args:
+        - NPM_TOKEN=${NPM_TOKEN}
+    volumes:
+      - ./linnia-server/:/usr/src/linnia-server
+      - /usr/src/linnia-server/node_modules
+    environment:
+      LINNIA_DB_USERNAME: ${STOW_DB_USERNAME}
+      LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
+      LINNIA_DB_NAME: ${STOW_DB_NAME}
+      LINNIA_DB_PORT: ${STOW_DB_PORT}
+      LINNIA_DB_HOST: ${STOW_DB_HOST}
+      LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
+      LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
+      NPM_TOKEN: ${NPM_TOKEN}
+    ports:
+     - "3000:3000"
+  ddex-server:
+    build: 
+      context: ./linnia-ddex-server/.
+      args:
+        - NPM_TOKEN=${NPM_TOKEN}
+    volumes:
+      - ./linnia-ddex-server/:/usr/src/linnia-ddex-server
+      - /usr/src/linnia-ddex-server/node_modules
+    environment:
+      LINNIA_DB_USERNAME: ${STOW_DB_USERNAME}
+      LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
+      LINNIA_DB_NAME: ${STOW_DB_NAME}
+      LINNIA_DB_PORT: ${STOW_DB_PORT}
+      LINNIA_DB_HOST: ${STOW_DB_HOST}
+      LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
+      LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
+      LINNIA_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
+      NPM_TOKEN: ${NPM_TOKEN}
+    ports:
+     - "3001:3000"
+  ddex-ui:
+    build: 
+      context: ./linnia-ddex-ui/.
+      args:
+        - NPM_TOKEN=${NPM_TOKEN}
+    volumes:
+      - ./linnia-ddex-ui/:/usr/src/linnia-ddex-ui
+      - /usr/src/linnia-ddex-ui/node_modules
+    environment:
+      REACT_APP_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
+      REACT_APP_SERVER_URL: ${STOW_SERVER_URL}
+      REACT_APP_DDEX_SERVER_URL: ${STOW_DDEX_SERVER_URL}
+      REACT_APP_IPFS_HOST: ${STOW_IPFS_HOST}
+      REACT_APP_IPFS_PORT: ${STOW_IPFS_PORT}
+      REACT_APP_IPFS_PROTOCOL: ${STOW_IPFS_PROTOCOL}
+      NPM_TOKEN: ${NPM_TOKEN}
+    ports:
+     - "3002:3000"
