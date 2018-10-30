@@ -1,0 +1,24 @@
+{
+  "name": "stow-proxy",
+  "version": "1.0.0",
+  "description": "A thin proxy service for local testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConsenSys/stow-ddex-compose.git"
+  },
+  "author": "Max Blaushild",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConsenSys/stow-ddex-compose/issues"
+  },
+  "homepage": "https://github.com/ConsenSys/stow-ddex-compose#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^0.19.0"
+  }
+}
