@@ -1,5 +1,18 @@
 version: '3'
 services:
+  proxy:
+    build:
+      context: ./stow-proxy/.
+    environment:
+      STOW_SERVER_URL: ${STOW_SERVER_URL}
+      STOW_DDEX_SERVER_URL: ${STOW_DDEX_SERVER_URL}
+      STOW_DDEX_AUTH_URL: ${STOW_DDEX_AUTH_URL}
+    ports:
+      - "3001:3000"
+    links:
+      - server
+      - ddex-server
+      - ddex-auth
   server:
     build: 
       context: ./linnia-server/.
@@ -13,12 +26,11 @@ services:
       LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
       LINNIA_DB_NAME: ${STOW_DB_NAME}
       LINNIA_DB_PORT: ${STOW_DB_PORT}
+      LINNIA_PORT: 80
       LINNIA_DB_HOST: ${STOW_DB_HOST}
       LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
       LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
       NPM_TOKEN: ${NPM_TOKEN}
-    ports:
-     - "3000:3000"
   ddex-server:
     build: 
       context: ./linnia-ddex-server/.
@@ -32,13 +44,28 @@ services:
       LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
       LINNIA_DB_NAME: ${STOW_DB_NAME}
       LINNIA_DB_PORT: ${STOW_DB_PORT}
+      LINNIA_PORT: 80
       LINNIA_DB_HOST: ${STOW_DB_HOST}
       LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
       LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
       LINNIA_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
       NPM_TOKEN: ${NPM_TOKEN}
-    ports:
-     - "3001:3000"
+  ddex-auth:
+    build: 
+      context: ./stow-ddex-auth/.
+      args:
+        - NPM_TOKEN=${NPM_TOKEN}
+    volumes:
+      - ./stow-ddex-auth/:/usr/src/stow-ddex-auth
+      - /usr/src/stow-ddex-auth/node_modules
+    environment:
+      STOW_DB_USERNAME: ${STOW_DB_USERNAME}
+      STOW_DB_PASSWORD: ${STOW_DB_PASSWORD}
+      STOW_DB_NAME: ${STOW_DB_NAME}
+      STOW_DB_PORT: ${STOW_DB_PORT}
+      LINNIA_PORT: 80
+      STOW_DB_HOST: ${STOW_DB_HOST}
+      NPM_TOKEN: ${NPM_TOKEN}
   ddex-ui:
     build: 
       context: ./linnia-ddex-ui/.
@@ -49,11 +76,9 @@ services:
       - /usr/src/linnia-ddex-ui/node_modules
     environment:
       REACT_APP_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
-      REACT_APP_SERVER_URL: ${STOW_SERVER_URL}
-      REACT_APP_DDEX_SERVER_URL: ${STOW_DDEX_SERVER_URL}
       REACT_APP_IPFS_HOST: ${STOW_IPFS_HOST}
       REACT_APP_IPFS_PORT: ${STOW_IPFS_PORT}
       REACT_APP_IPFS_PROTOCOL: ${STOW_IPFS_PROTOCOL}
       NPM_TOKEN: ${NPM_TOKEN}
     ports:
-     - "3002:3000"
+     - "3000:3000"
