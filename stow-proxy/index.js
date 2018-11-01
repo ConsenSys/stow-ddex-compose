@@ -7,8 +7,8 @@ const authUrl = process.env.STOW_DDEX_AUTH_URL;
 
 const app = express();
 
-app.use('/register', proxy({ target: authUrl }));
-app.use('/offers/*', proxy({ target: ddexServerUrl }));
+app.use('/auth', proxy({ target: authUrl }));
+app.use('/offers', proxy({ target: ddexServerUrl }));
 app.use('/*', proxy({ target: serverUrl }));
 
 app.listen(port || 3000);
