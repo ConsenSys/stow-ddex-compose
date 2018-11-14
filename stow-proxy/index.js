@@ -1,9 +1,9 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 const port = process.env.STOW_PORT;
-const serverUrl = process.env.STOW_SERVER_URL;
-const ddexServerUrl = process.env.STOW_DDEX_SERVER_URL;
-const authUrl = process.env.STOW_DDEX_AUTH_URL;
+const serverUrl = 'http://server';
+const ddexServerUrl = 'http://ddex-server';
+const authUrl = 'http://ddex-auth';
 
 const app = express();
 

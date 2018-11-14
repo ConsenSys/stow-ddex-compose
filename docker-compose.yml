@@ -3,10 +3,6 @@ services:
   proxy:
     build:
       context: ./stow-proxy/.
-    environment:
-      STOW_SERVER_URL: ${STOW_SERVER_URL}
-      STOW_DDEX_SERVER_URL: ${STOW_DDEX_SERVER_URL}
-      STOW_DDEX_AUTH_URL: ${STOW_DDEX_AUTH_URL}
     ports:
       - "3001:3000"
     links:
@@ -58,11 +54,13 @@ services:
     volumes:
       - ./stow-ddex-auth/:/usr/src/stow-ddex-auth
       - /usr/src/stow-ddex-auth/node_modules
+      - ~/.aws:/root/.aws:ro
     environment:
       STOW_DB_USERNAME: ${STOW_DB_USERNAME}
       STOW_DB_PASSWORD: ${STOW_DB_PASSWORD}
       STOW_DB_NAME: ${STOW_DB_NAME}
       STOW_DB_PORT: ${STOW_DB_PORT}
+      STOW_ENV: ${STOW_ENV}
       LINNIA_PORT: 80
       STOW_DB_HOST: ${STOW_DB_HOST}
       NPM_TOKEN: ${NPM_TOKEN}
