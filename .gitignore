@@ -1,5 +1,5 @@
-linnia-server/
-linnia-ddex-server/
-linnia-ddex-ui/
+stow-server/
+stow-ddex-server/
+stow-ddex-ui/
 stow-ddex-auth/
 .env
