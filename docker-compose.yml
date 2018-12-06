@@ -11,40 +11,38 @@ services:
       - ddex-auth
   server:
     build: 
-      context: ./linnia-server/.
+      context: ./stow-server/.
       args:
         - NPM_TOKEN=${NPM_TOKEN}
     volumes:
-      - ./linnia-server/:/usr/src/linnia-server
-      - /usr/src/linnia-server/node_modules
+      - ./stow-server/:/usr/src/stow-server
+      - /usr/src/stow-server/node_modules
     environment:
-      LINNIA_DB_USERNAME: ${STOW_DB_USERNAME}
-      LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
-      LINNIA_DB_NAME: ${STOW_DB_NAME}
-      LINNIA_DB_PORT: ${STOW_DB_PORT}
-      LINNIA_PORT: 80
-      LINNIA_DB_HOST: ${STOW_DB_HOST}
-      LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
-      LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
+      STOW_DB_USERNAME: ${STOW_DB_USERNAME}
+      STOW_DB_PASSWORD: ${STOW_DB_PASSWORD}
+      STOW_DB_NAME: ${STOW_DB_NAME}
+      STOW_DB_PORT: ${STOW_DB_PORT}
+      STOW_PORT: 80
+      STOW_DB_HOST: ${STOW_DB_HOST}
+      STOW_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
       NPM_TOKEN: ${NPM_TOKEN}
   ddex-server:
     build: 
-      context: ./linnia-ddex-server/.
+      context: ./stow-ddex-server/.
       args:
         - NPM_TOKEN=${NPM_TOKEN}
     volumes:
-      - ./linnia-ddex-server/:/usr/src/linnia-ddex-server
-      - /usr/src/linnia-ddex-server/node_modules
+      - ./stow-ddex-server/:/usr/src/stow-ddex-server
+      - /usr/src/stow-ddex-server/node_modules
     environment:
-      LINNIA_DB_USERNAME: ${STOW_DB_USERNAME}
-      LINNIA_DB_PASSWORD: ${STOW_DB_PASSWORD}
-      LINNIA_DB_NAME: ${STOW_DB_NAME}
-      LINNIA_DB_PORT: ${STOW_DB_PORT}
-      LINNIA_PORT: 80
-      LINNIA_DB_HOST: ${STOW_DB_HOST}
-      LINNIA_HUB_ADDRESS: ${STOW_HUB_ADDRESS}
-      LINNIA_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
-      LINNIA_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
+      STOW_DB_USERNAME: ${STOW_DB_USERNAME}
+      STOW_DB_PASSWORD: ${STOW_DB_PASSWORD}
+      STOW_DB_NAME: ${STOW_DB_NAME}
+      STOW_DB_PORT: ${STOW_DB_PORT}
+      STOW_PORT: 80
+      STOW_DB_HOST: ${STOW_DB_HOST}
+      STOW_ETH_PROVIDER: ${STOW_ETH_PROVIDER}
+      STOW_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
       NPM_TOKEN: ${NPM_TOKEN}
   ddex-auth:
     build: 
@@ -66,12 +64,12 @@ services:
       NPM_TOKEN: ${NPM_TOKEN}
   ddex-ui:
     build: 
-      context: ./linnia-ddex-ui/.
+      context: ./stow-ddex-ui/.
       args:
         - NPM_TOKEN=${NPM_TOKEN}
     volumes:
-      - ./linnia-ddex-ui/:/usr/src/linnia-ddex-ui
-      - /usr/src/linnia-ddex-ui/node_modules
+      - ./stow-ddex-ui/:/usr/src/stow-ddex-ui
+      - /usr/src/stow-ddex-ui/node_modules
     environment:
       REACT_APP_DDEX_HUB_ADDRESS: ${STOW_DDEX_HUB_ADDRESS}
       REACT_APP_IPFS_HOST: ${STOW_IPFS_HOST}
